@@ -1,0 +1,92 @@
+{%extends "upper_menu.html" %}
+{% block head %}
+    {% load static from staticfiles %}
+    <link rel="stylesheet" href="{% static '/css/style_chair_reviewer_applicaiton.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style_general.css' %}">
+{% endblock %}
+{% block content %}
+    {% if is_admin_logged_in %}
+    <div id="divAdminAcceptChairReviewerMainContainer">
+        <div class="divTableContainer divChildHalfSpace">
+        <h2>Chairs</h2>
+        <table cellspacing="10">
+            <tr>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+
+                </th>
+            </tr>
+            {% for chair in chairs %}
+
+                <tr>
+
+                    <td>
+                        {{ chair.email }}
+                    </td>
+                    <td>
+                        {{ chair.name }}
+                    </td>
+                    <td>
+                    {%  if chair.is_accepted %}
+                        <a class="acceptedUserButton" href="accept_reject_chair_reviewer_handle?is_accepted={{ chair.is_accepted }}&user_type=chair&user_mail={{ chair.email }}">Deauthorise</a>
+                    {% else %}
+                        <a class="rejectedUserButton" href="accept_reject_chair_reviewer_handle?is_accepted={{ chair.is_accepted }}&user_type=chair&user_mail={{ chair.email }}">Authorise</a>
+                    {% endif %}
+                    </td>
+
+
+                </tr>
+
+
+            {% endfor %}
+        </table>
+
+    </div>
+    <div class="divTableContainer divChildHalfSpace">
+        <h2>Reviewers</h2>
+        <table cellspacing="10">
+            <tr>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+
+                </th>
+            </tr>
+            {% for reviewer in reviewers %}
+
+                <tr>
+
+                    <td>
+                        {{ reviewer.email }}
+                    </td>
+                    <td>
+                        {{ reviewer.name }}
+                    </td>
+                <td>
+                    {%  if reviewer.is_accepted %}
+                        <a class="acceptedUserButton" href="accept_reject_chair_reviewer_handle?is_accepted={{ reviewer.is_accepted }}&user_type=reviewer&user_mail={{ reviewer.email }}">Deauthorise</a>
+                    {% else %}
+                        <a class="rejectedUserButton" href="accept_reject_chair_reviewer_handle?is_accepted={{ reviewer.is_accepted }}&user_type=reviewer&user_mail={{ reviewer.email }}">Authorise</a>
+                    {% endif %}
+                </td>
+
+
+                </tr>
+
+
+            {% endfor %}
+        </table>
+
+    </div>
+    </div>
+{% endif %}
+{% endblock %}

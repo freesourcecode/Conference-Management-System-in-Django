@@ -1,0 +1,44 @@
+{%extends "upper_menu.html" %}
+{% block head %}
+    {% load static from staticfiles %}
+    <link rel="stylesheet" href="{% static '/css/style_chair_reviewer_applicaiton.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style_chair_reviewer_applicaiton.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="divMainContainer">
+        <div class="divTableContainer divChildHalfSpace">
+        <h2>Reviewers</h2>
+        <table cellspacing="10">
+            <tr>
+                <th>
+                    Reviewer Name
+                </th>
+                <th>
+                    See review
+                </th>
+
+            </tr>
+            {% for review in reviews %}
+
+                <tr>
+
+                    <td>
+                        {{ review.reviewer.name }}
+                    </td>
+
+                    <td>
+                        <a href="paper_review?review_id={{ review.id }}">See review</a>
+                    </td>
+
+
+
+                </tr>
+
+
+            {% endfor %}
+        </table>
+
+        </div>
+
+    </div>
+{% endblock %}
